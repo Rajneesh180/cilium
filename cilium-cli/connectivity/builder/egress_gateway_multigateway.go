@@ -17,7 +17,7 @@ func (t egressGatewayMultigateway) build(ct *check.ConnectivityTest, _ map[strin
 	// Prefix the test name with `seq-` to run it sequentially.
 	newTest("seq-egress-gateway-multigateway", ct).
 		WithCiliumVersion(">=1.18.0").
-		WithCondition(func() bool { return ct.Params().IncludeUnsafeTests }).
+		WithUnsafeTests().
 		WithCiliumEgressGatewayPolicy(check.CiliumEgressGatewayPolicyParams{
 			Name:            fmt.Sprintf("cegp-sample-client-%d", ct.Params().TestNamespaceIndex),
 			PodSelectorKind: "client",

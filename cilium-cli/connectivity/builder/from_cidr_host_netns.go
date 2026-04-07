@@ -14,7 +14,7 @@ type fromCidrHostNetns struct{}
 func (t fromCidrHostNetns) build(ct *check.ConnectivityTest, templates map[string]string) {
 	// Prefix the test name with `seq-` to run it sequentially.
 	newTest("seq-from-cidr-host-netns", ct).
-		WithCondition(func() bool { return ct.Params().IncludeUnsafeTests }).
+		WithUnsafeTests().
 		WithFeatureRequirements(features.RequireEnabled(features.NodeWithoutCilium)).
 		WithCiliumPolicy(templates["echoIngressFromCIDRYAML"]).
 		WithIPRoutesFromOutsideToPodCIDRs().

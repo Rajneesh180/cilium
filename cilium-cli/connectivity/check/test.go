@@ -448,6 +448,13 @@ func (t *Test) WithMultiNodeOnly() *Test {
 	return t.WithCondition(fn, "test requires a multi-node cluster")
 }
 
+// WithPerf causes the test to only be executed when perf connectivity tests
+// are enabled.
+func (t *Test) WithPerf() *Test {
+	fn := func() bool { return t.ctx.Params().Perf }
+	return t.WithCondition(fn, "network performance tests excluded")
+}
+
 // WithCiliumVersion limits test execution to Cilium versions that fall within
 // the given range. The input string is passed to [semver.ParseRange], see
 // package semver. Simple examples: ">1.0.0 <2.0.0" or ">=1.14.0".
